@@ -1,0 +1,53 @@
+What is the cookie?
+The cookie is a placeholder which store the information.Meanwhile,it stores in localhost computer.
+
+So how to create the cookie and send the cookie from server to client?Here is a demo about it:
+
+package com.itheima.cookie;
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+/**
+ * Servlet implementation class SendCookieServlet
+ */
+@WebServlet("/sendCookie")
+public class SendCookieServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;     
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public SendCookieServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }	
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//1.创建cookie
+		Cookie cookie = new Cookie("name", "zhangsan");
+		
+		//1.1 cookie设置持久化时间-----cookie信息在硬盘上保存的时间
+		cookie.setMaxAge(60*10);   //10分钟
+		
+		//1.2 设置cookie的携带路径
+		//cookie.setPath("WEB16/sendCookie");
+		cookie.setPath("/WEB16");
+			
+		//2.将cookie中存放的消息发送到客户端，以头的形式
+		response.addCookie(cookie);
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+}
+
